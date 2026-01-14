@@ -40,7 +40,7 @@ const char *get_mtd_layout_label(void)
 		layout_label = env_get("mtd_layout_label");
 
 	if (!layout_label)
-		layout_label = "default";
+		layout_label = "expand(114m)";
 
 	return layout_label;
 }
