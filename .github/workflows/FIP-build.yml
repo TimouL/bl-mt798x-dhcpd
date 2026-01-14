@@ -16,7 +16,7 @@ on:
       FIP_VERSION: 
         description: 'FIP versions (comma-separated, e.g. 2022,2023,2024,2025/all)'
         required: true
-        default: '2025'
+        default: '2024'
         type: string
       REPO_URL:
         description: 'Source repository'
