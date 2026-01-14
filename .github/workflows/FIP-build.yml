@@ -11,12 +11,12 @@ on:
       MODEL:
         description: 'Model selection'
         required: true
-        default: 'cmcc_a10'
+        default: 'honor_fur-602'
         type: string
       FIP_VERSION: 
         description: 'FIP versions (comma-separated, e.g. 2022,2023,2024,2025/all)'
         required: true
-        default: '2024'
+        default: '2025'
         type: string
       REPO_URL:
         description: 'Source repository'
