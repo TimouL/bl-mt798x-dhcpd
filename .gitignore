@@ -36,3 +36,4 @@ output_simg/*
 mt798x_gpt_bin/*
 mt798x_simg/*
 unopen/*
+.ace-tool/
