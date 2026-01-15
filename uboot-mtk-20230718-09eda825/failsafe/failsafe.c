@@ -90,6 +90,28 @@ static void version_handler(enum httpd_uri_handler_status status,
 	response->info.content_type = "text/plain";
 }
 
+static void capabilities_handler(enum httpd_uri_handler_status status,
+	struct httpd_request *request,
+	struct httpd_response *response)
+{
+	static const char caps_json[] =
+#ifdef CONFIG_MTK_BOOTMENU_MMC
+		"{\"has_mmc\":true}";
+#else
+		"{\"has_mmc\":false}";
+#endif
+
+	if (status != HTTP_CB_NEW)
+		return;
+
+	response->status = HTTP_RESP_STD;
+	response->data = caps_json;
+	response->size = strlen(caps_json);
+	response->info.code = 200;
+	response->info.connection_close = 1;
+	response->info.content_type = "application/json";
+}
+
 static void index_handler(enum httpd_uri_handler_status status,
 			  struct httpd_request *request,
 			  struct httpd_response *response)
@@ -393,6 +415,7 @@ int start_web_failsafe(void)
 	httpd_register_uri_handler(inst, "/", &index_handler, NULL);
 	httpd_register_uri_handler(inst, "/bl2.html", &html_handler, NULL);
 	httpd_register_uri_handler(inst, "/booting.html", &html_handler, NULL);
+	httpd_register_uri_handler(inst, "/capabilities", &capabilities_handler, NULL);
 	httpd_register_uri_handler(inst, "/cgi-bin/luci", &index_handler, NULL);
 	httpd_register_uri_handler(inst, "/cgi-bin/luci/", &index_handler, NULL);
 	httpd_register_uri_handler(inst, "/fail.html", &html_handler, NULL);
